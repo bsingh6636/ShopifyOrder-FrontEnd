@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ChartMaker from '../pages/ChartMaker';
 import { shopifyCustomers as data } from '../pages/initialValues';
+import Buttons from '../pages/Buttons';
 
 const RepeatCustomersChart = () => {
     const shopifyCustomers = data;
@@ -68,12 +69,7 @@ const RepeatCustomersChart = () => {
 
     return (
         <div>
-            <div className="flex space-x-4 mb-4">
-                <button className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700" onClick={() => setInterval('daily')}>Daily</button>
-                <button className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700" onClick={() => setInterval('monthly')}>Monthly</button>
-                <button className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700" onClick={() => setInterval('quarterly')}>Quarterly</button>
-                <button className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700" onClick={() => setInterval('yearly')}>Yearly</button>
-            </div>
+           <Buttons interval={interval} setInterval={setInterval} />
             <ChartMaker data={repeatData} type="Repeat Customers" />
         </div>
     );

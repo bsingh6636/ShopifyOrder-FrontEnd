@@ -10,7 +10,7 @@ const ChartMaker = ({data ,type}) => {
         <div className="w-full md:w-1/2 px-4 mb-4">
           <h3 className="text-xl font-bold mb-2">Line Chart</h3>
           <ChartComponent
-            type="Line Chart"
+            type={type}
             data={data}
             chartType="line"
           />
@@ -18,7 +18,7 @@ const ChartMaker = ({data ,type}) => {
         <div className="w-full md:w-1/2 px-4 mb-4">
           <h3 className="text-xl font-bold mb-2">Bar Chart</h3>
           <ChartComponent
-            type="Sales Growth Rate"
+             type={type}
             data={data}
             chartType="bar"
           />
@@ -26,7 +26,7 @@ const ChartMaker = ({data ,type}) => {
         <div className="w-full md:w-1/2 px-4 mb-4">
           <h3 className="text-xl font-bold mb-2">Pie Chart</h3>
           <ChartComponent
-            type="Sales Growth Rate"
+           type={type}
             data={data}
             chartType="pie"
           />
@@ -34,7 +34,7 @@ const ChartMaker = ({data ,type}) => {
         <div className="w-full md:w-1/2 px-4 mb-4">
           <h3 className="text-xl font-bold mb-2">Radar Chart</h3>
           <ChartComponent
-            type="Sales Growth Rate"
+             type={type}
             data={data}
             chartType="radar"
           />
