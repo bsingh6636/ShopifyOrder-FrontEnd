@@ -1,70 +1,72 @@
-# Getting Started with Create React App
+# E-Commerce Data Visualization Web Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+This project is a data visualization web application designed to analyze e-commerce data from a Shopify store stored in MongoDB. The application includes a REST API built with Node.js and Express, which interacts with the MongoDB database to fetch and manipulate data. The frontend, developed using ReactJS and Chart.js, visualizes the data through various charts and maps.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Total Sales Over Time**: Visualization of total sales over different time intervals (daily, monthly, quarterly, and yearly).
+- **Sales Growth Rate Over Time**: Analysis of the growth rate of sales.
+- **New Customers Added Over Time**: Tracking and visualization of new customers based on their creation date.
+- **Number of Repeat Customers**: Identification and visualization of customers with more than one purchase across different time frames.
+- **Geographical Distribution of Customers**: Visualization of the geographical distribution of customers using their city data.
+- **Customer Lifetime Value by Cohorts**: Grouping customers by the month of their first purchase and visualizing their lifetime value.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Technologies Used
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Backend
 
-### `npm test`
+- **Node.js**: JavaScript runtime for building server-side applications.
+- **Express.js**: Web framework for Node.js used to build the RESTful API.
+- **MongoDB**: NoSQL database used to store Shopify data.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Frontend
 
-### `npm run build`
+- **ReactJS**: JavaScript library for building user interfaces.
+- **Chart.js**: JavaScript charting library used for data visualization.
+- **React-Chart.js**: React wrapper for Chart.js to easily integrate charts into the React application.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## API Endpoints
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **GET /api/sales-over-time**: Retrieves total sales over time, grouped by different intervals.
+- **GET /api/sales-growth-rate**: Retrieves sales growth rate data over time.
+- **GET /api/new-customers**: Retrieves the count of new customers added over time.
+- **GET /api/repeat-customers**: Retrieves the number of repeat customers over various time frames.
+- **GET /api/customer-geography**: Retrieves geographical distribution of customers by city.
+- **GET /api/customer-lifetime-value**: Retrieves customer lifetime value data by cohorts.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Setup Instructions
 
-### `npm run eject`
+### Prerequisites
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Node.js and npm installed on your machine.
+- MongoDB instance with the sample data loaded (see connection details below).
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Backend Setup
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/ecommerce-data-visualization.git
+   cd ecommerce-data-visualization
+2. INstall dependies
+   ```bash
+   npm install
+3. Configure .env with MONGO URl
+4. Start the Backend Server
+   ```bash
+   npm run server
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Usage
+Visit the deployed application through the provided URL. The application will display various data visualizations, such as sales over time, sales growth rate, new customers, repeat customers, geographical distribution, and customer lifetime value by cohorts.
 
-## Learn More
+Demo
+Live App: [ Deployed URL](https://shopify-order-front-end.vercel.app/)
+GitHub Repository: [Link to Repository](https://github.com/bsingh6636/ShopifyOrder-FrontEnd)
+License
+This project is licensed under the MIT License.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Contact
+For any inquiries or feedback, please contact yourname@example.com.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Feel free to contribute to this project by forking the repository and submitting pull requests. Any contributions are welcome!
