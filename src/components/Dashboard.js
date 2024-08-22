@@ -5,11 +5,12 @@ import moment from 'moment';
 import { salesData } from '../pages/initialValues';
 import ChartMaker from '../pages/ChartMaker';
 import Buttons from '../pages/Buttons';
+import LoadingShimmer from '../pages/Shimmer';
 
 function Dashboard() {
   const collectionName = 'shopifyOrders'
   const [interval, setInterval] = useState('monthly');
-  const [data, setData] = useState(salesData)
+  const [data, setData] = useState()
   const datas = useFetchData(`${backend_server}`, collectionName);
   useEffect(() => {
     setData(datas);
@@ -99,10 +100,13 @@ function Dashboard() {
       <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
 
       <Buttons interval={interval} setInterval={setInterval} />
-
-      <div className='flex flex-row justify-between mb-6'>
-        <ChartMaker data={filteredData}  type="sales Data"/>
-       
+{console.log(data)}
+<div className='flex flex-row justify-between mb-6'>
+        {data ? (
+          <ChartMaker data={filteredData} type="sales Data" />
+        ) : (
+          <LoadingShimmer />
+        )}
       </div>
 
      
