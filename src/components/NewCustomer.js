@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import ChartMaker from '../pages/ChartMaker';
 import { shopifyCustomers as data } from '../pages/initialValues';
 import Buttons from '../pages/Buttons';
+import useFetchData from '../hooks/useFetchData';
+import { backend_server } from '../import';
 
 const NewCustomersChart = () => {
     const shopifyCustomers = data;
     const [growthData, setGrowthData] = useState([]);
     const [interval, setInterval] = useState('daily');
+   useFetchData(`${backend_server}`, 'shopifyCustomers');
 
     useEffect(() => {
         const customerCounts = {};

@@ -10,11 +10,12 @@ import LoadingShimmer from '../pages/Shimmer';
 function Dashboard() {
   const collectionName = 'shopifyOrders'
   const [interval, setInterval] = useState('monthly');
-  const [data, setData] = useState()
+  const [data, setData] = useState(salesData)
   const datas = useFetchData(`${backend_server}`, collectionName);
-  useEffect(() => {
-    setData(datas);
-  }, [datas]);
+  console.log(data)
+  // useEffect(() => {
+  //   setData(datas);
+  // }, [datas]);
 
   const filterDataByInterval = (data, interval) => {
     let filteredData;
@@ -100,7 +101,7 @@ function Dashboard() {
       <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
 
       <Buttons interval={interval} setInterval={setInterval} />
-{console.log(data)}
+
 <div className='flex flex-row justify-between mb-6'>
         {data ? (
           <ChartMaker data={filteredData} type="sales Data" />
