@@ -1,5 +1,5 @@
 import React from 'react'
-import ChartComponent from './Charcomponent'
+import ChartComponent from '../components/Charcomponent'
 
 
 const ChartMaker = ({data ,type}) => {
