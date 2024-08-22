@@ -30,13 +30,11 @@ const GeographicalDistribution = () => {
             'San Diego': [32.7157, -117.1611],
             'Dallas': [32.7767, -96.7970],
             'San Jose': [37.3382, -121.8863],
-            'Austin': [30.2672, -97.7431],
             'Jacksonville': [30.3322, -81.6557],
             'Fort Worth': [32.7555, -97.3308],
             'Columbus': [39.9612, -82.9988],
             'Indianapolis': [39.7684, -86.1581],
             'Charlotte': [35.2271, -80.8431],
-            'San Francisco': [37.7749, -122.4194],
             'Seattle': [47.6062, -122.3321],
             'Denver': [39.7392, -104.9903],
             'Washington, D.C.': [38.8951, -77.0369],
@@ -80,6 +78,7 @@ const GeographicalDistribution = () => {
         }).filter(marker => marker !== null);
 
         setMarkers(customerMarkers);
+        // eslint-disable-next-line
     }, [data]);
 
     return (

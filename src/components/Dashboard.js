@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import useFetchData from '../hooks/useFetchData';
 import { backend_server } from '../import';
 import moment from 'moment';
 import { salesData } from '../pages/initialValues';
-import { Context } from '../index';
 import ChartMaker from '../pages/ChartMaker';
 import Buttons from '../pages/Buttons';
 
@@ -103,18 +102,10 @@ function Dashboard() {
 
       <div className='flex flex-row justify-between mb-6'>
         <ChartMaker data={filteredData}  type="sales Data"/>
-        {/* <div className=''>
-          <ChartComponent className='' type="Revenue Data" data={filteredData} chartType="line" />
-        </div>
-        <div className=''>
-          <ChartComponent className='' type="Sales Data" data={filteredData} chartType="bar" />
-        </div> */}
+       
       </div>
 
-      {/* <div className='flex flex-col mb-6'>
-        <ChartComponent className='w-full mb-6' type="Category Distribution" data={filteredData} chartType="pie" />
-        <ChartComponent className='w-full' type="Performance Comparison" data={filteredData} chartType="radar" />
-      </div> */}
+     
     </div>
 
   );

@@ -52,6 +52,7 @@ const CustomerLifetimeValueByCohorts = () => {
         }));
 
         setCohortData(data);
+        // eslint-disable-next-line
     }, [customers, orders, interval]);
 
     return (

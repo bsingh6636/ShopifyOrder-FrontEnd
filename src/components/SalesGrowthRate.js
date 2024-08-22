@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import ChartComponent from '../pages/Charcomponent';
 import moment from 'moment';
 import { salesData as initialSalesData } from '../pages/initialValues';
 import Buttons from '../pages/Buttons';
