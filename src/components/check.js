@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import ChartComponent from '../pages/charcomponent';
+import ChartComponent from '../pages/Charcomponent';
+import SalesGrowthRate from './SalesGrowthRate'; // Import the SalesGrowthRate component
 import useFetchData from '../hooks/useFetchData';
 import { backend_server } from '../import';
 import moment from 'moment';
@@ -11,51 +12,90 @@ function Dashboard2() {
   const [interval, setInterval] = useState('monthly');
   const [data, setData] = useState(salesData);
   const { salesMode } = useContext(Context);
+  console.log(salesMode);
   const datas = useFetchData(`${backend_server}`, collectionName);
 
   useEffect(() => {
     setData(datas);
   }, [datas]);
-  function calculateSalesGrowthRate(data, interval) {
-    let growthData = [];
-  
-    // Sort the data based on the interval (daily, monthly, quarterly, yearly)
+
+  const filterDataByInterval = (data, interval) => {
+    let filteredData;
+
     switch (interval) {
       case 'daily':
-        data.sort((a, b) => moment(a.created_at).diff(moment(b.created_at)));
+        filteredData = data; // Implement daily filtering logic, if needed
         break;
       case 'monthly':
-        data.sort((a, b) => moment(a.month, 'YYYY-MM').diff(moment(b.month, 'YYYY-MM')));
+        filteredData = data.reduce((acc, item) => {
+          const month = moment(item.created_at).format('YYYY-MM');
+          const totalPrice = parseFloat(item.total_price) || 0;
+
+          const existing = acc.find(i => i.month === month);
+          if (existing) {
+            existing.total_price += totalPrice;
+          } else {
+            acc.push({ month, total_price: totalPrice });
+          }
+
+          return acc;
+        }, []);
         break;
       case 'quarterly':
-        data.sort((a, b) => moment(a.yearQuarter, 'YYYY-[Q]Q').diff(moment(b.yearQuarter, 'YYYY-[Q]Q')));
+        filteredData = data.reduce((acc, item) => {
+          const yearQuarter = moment(item.created_at).format('YYYY-[Q]Q');
+          const totalPrice = parseFloat(item.total_price) || 0;
+
+          const existing = acc.find(i => i.yearQuarter === yearQuarter);
+          if (existing) {
+            existing.total_price += totalPrice;
+          } else {
+            acc.push({ yearQuarter, total_price: totalPrice });
+          }
+
+          return acc;
+        }, []);
         break;
       case 'yearly':
-        data.sort((a, b) => moment(a.year, 'YYYY').diff(moment(b.year, 'YYYY')));
+        filteredData = data.reduce((acc, item) => {
+          const year = moment(item.created_at).format('YYYY');
+          const totalPrice = parseFloat(item.total_price) || 0;
+
+          const existing = acc.find(i => i.year === year);
+          if (existing) {
+            existing.total_price += totalPrice;
+          } else {
+            acc.push({ year, total_price: totalPrice });
+          }
+
+          return acc;
+        }, []);
         break;
       default:
-        break;
+        filteredData = data;
     }
-  
-    // Calculate the growth rate
-    for (let i = 1; i < data.length; i++) {
-      const previous = data[i - 1];
-      const current = data[i];
-  
-      const growthRate = ((current.total_price - previous.total_price) / previous.total_price) * 100;
-  
-      growthData.push({
-        ...current,
-        growthRate: growthRate.toFixed(2) // Keep two decimal places
-      });
-    }
-  
-    return growthData;
-  }
-  
-  const filteredData = data ? filterDataByInterval(data, interval) : [];
 
-  const growthData = salesMode === 'salesGrowth' ? calculateSalesGrowthRate(filteredData, interval) : null;
+    switch (interval) {
+      case 'daily':
+        filteredData.sort((a, b) => moment(a.created_at).diff(moment(b.created_at)));
+        break;
+      case 'monthly':
+        filteredData.sort((a, b) => moment(a.month, 'YYYY-MM').diff(moment(b.month, 'YYYY-MM')));
+        break;
+      case 'quarterly':
+        filteredData.sort((a, b) => moment(a.yearQuarter, 'YYYY-[Q]Q').diff(moment(b.yearQuarter, 'YYYY-[Q]Q')));
+        break;
+      case 'yearly':
+        filteredData.sort((a, b) => moment(a.year, 'YYYY').diff(moment(b.year, 'YYYY')));
+        break;
+      default:
+      // No sorting needed for 'daily' if it's not filtered or already sorted
+    }
+
+    return filteredData;
+  };
+
+  const filteredData = data ? filterDataByInterval(data, interval) : [];
 
   return (
     <div className="dashboard w-4/5 p-8">
@@ -68,28 +108,26 @@ function Dashboard2() {
         <button className='m-1 mx-4 p-2 bg-gray-300 rounded-lg hover:bg-gray-400' onClick={() => setInterval('yearly')}>Yearly</button>
       </div>
 
-      {salesMode === 'salesOverTime' ? (
-        <div className='flex flex-row justify-between mb-6'>
-          <div>
-            <ChartComponent type="Revenue Data" data={filteredData} chartType="line" />
-          </div>
-          <div>
-            <ChartComponent type="Sales Data" data={filteredData} chartType="bar" />
-          </div>
+      <div className='flex flex-row justify-between mb-6'>
+        <div className=''>
+          <ChartComponent className='' type="Revenue Data" data={filteredData} chartType="line" />
         </div>
-      ) : (
-        <div className='flex flex-col mb-6'>
-          <ChartComponent type="Sales Growth Rate" data={growthData} chartType="line" />
+        <div className=''>
+          <ChartComponent className='' type="Sales Data" data={filteredData} chartType="bar" />
         </div>
-      )}
+      </div>
 
       <div className='flex flex-col mb-6'>
-        <ChartComponent type="Category Distribution" data={filteredData} chartType="pie" />
-        <ChartComponent type="Performance Comparison" data={filteredData} chartType="radar" />
+        <ChartComponent className='w-full mb-6' type="Category Distribution" data={filteredData} chartType="pie" />
+        <ChartComponent className='w-full' type="Performance Comparison" data={filteredData} chartType="radar" />
+      </div>
+
+      <div className='flex flex-col mb-6'>
+        {/* Include the Sales Growth Rate component */}
+        <SalesGrowthRate data={filteredData} interval={interval} />
       </div>
     </div>
   );
 }
 
 export default Dashboard2;
-

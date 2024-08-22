@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Line, Bar, Pie, Radar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend, RadialLinearScale, ArcElement } from 'chart.js';
 import moment from 'moment';
-import { Context } from '../index';
+
 
 
 // Register the components
@@ -10,12 +10,13 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarEleme
 
 function ChartComponent({ type, data, chartType }) {
   const [chartData, setChartData] = useState({});
-  const { salesMode } = useContext(Context)
+
   
   useEffect(() => {
     if (data) {
       const labels = data.map(item => moment(item.created_at || item.month || item.year).format('YYYY-MM-DD'));
-      const values = data.map(item => parseFloat(item.total_price));
+      const values = data.map(item => parseFloat(item.growthRate || item.total_price || item.count));
+     
 
       setChartData({
         labels: labels,
