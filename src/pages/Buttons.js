@@ -3,26 +3,27 @@ import React from 'react';
 const Buttons = ({ interval, setInterval }) => {
   // Define the button styles based on the interval
   const getButtonClass = (currentInterval) => {
-    const baseClass = "px-4 py-2 rounded focus:outline-none transition-colors duration-300";
-    const activeClass = "shadow-md text-white";
+    const baseClass = "px-4 py-2 rounded-md focus:outline-none transition-transform duration-300 ease-in-out";
+    const activeClass = "shadow-lg text-white scale-105 border-2 border-opacity-90";
+    const inactiveClass = "text-gray-700 hover:text-white hover:scale-105";
 
     switch (currentInterval) {
       case 'daily':
         return interval === 'daily'
-          ? `${baseClass} bg-indigo-500 ${activeClass}`
-          : `${baseClass} bg-indigo-300 text-gray-700 hover:bg-indigo-400`;
+          ? `${baseClass} bg-indigo-600 ${activeClass} border-indigo-700`
+          : `${baseClass} bg-indigo-300 ${inactiveClass} hover:bg-indigo-500`;
       case 'monthly':
         return interval === 'monthly'
-          ? `${baseClass} bg-green-500 ${activeClass}`
-          : `${baseClass} bg-green-300 text-gray-700 hover:bg-green-400`;
+          ? `${baseClass} bg-green-600 ${activeClass} border-green-700`
+          : `${baseClass} bg-green-300 ${inactiveClass} hover:bg-green-500`;
       case 'quarterly':
         return interval === 'quarterly'
-          ? `${baseClass} bg-yellow-500 ${activeClass}`
-          : `${baseClass} bg-yellow-300 text-gray-700 hover:bg-yellow-400`;
+          ? `${baseClass} bg-yellow-600 ${activeClass} border-yellow-700`
+          : `${baseClass} bg-yellow-300 ${inactiveClass} hover:bg-yellow-500`;
       case 'yearly':
         return interval === 'yearly'
-          ? `${baseClass} bg-red-500 ${activeClass}`
-          : `${baseClass} bg-red-300 text-gray-700 hover:bg-red-400`;
+          ? `${baseClass} bg-red-600 ${activeClass} border-red-700`
+          : `${baseClass} bg-red-300 ${inactiveClass} hover:bg-red-500`;
       default:
         return baseClass;
     }

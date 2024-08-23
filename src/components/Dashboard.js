@@ -97,7 +97,7 @@ function Dashboard() {
 
 
   return (
-    <div className="dashboard w-4/5 p-8">
+    <div className="dashboard  p-2">
       <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
 
       <Buttons interval={interval} setInterval={setInterval} />

@@ -16,15 +16,16 @@ const AboutUs = lazy(() => import('./components/AboutUs'));
 
 const Layout = ({ children }) => {
   return (
-    <div className="lg:px-12 app-container flex flex-col">
-      <Header />
-      <div className="flex flex-row">
-        <SideBar />
-        <main className="flex-1 ml-64 p-4"> {/* Adjust the margin-left based on your sidebar width */}
-          {children}
-        </main>
-      </div>
+    <div className="app-container flex flex-col min-h-screen bg-gray-100">
+    <Header className="shadow-md z-10" />
+    <div className="flex flex-row flex-1">
+      <SideBar className="shadow-lg bg-white min-w-[240px] w-64 p-6" />
+      <main className="flex-1 ml-0 lg:ml-10 xl:ml-10 p-6  bg-white shadow-md rounded-lg">
+        {children}
+      </main>
     </div>
+  </div>
+  
   );
 };
 

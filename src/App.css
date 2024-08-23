@@ -13,3 +13,28 @@
 .dashboard {
   padding: 20px;
 }
+
+.scroller {
+  width: 300px;
+  height: 100px;
+  overflow-y: scroll;
+  scrollbar-color: #007 #bada55; /* Thumb color and track color */
+  scrollbar-width: thin; /* Adjusts the width of the scrollbar */
+}
+
+
+::-webkit-scrollbar {
+  width: 3px; /* Width of the vertical scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #bada55; /* Color of the tracking area */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #007; /* Color of the scroll thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #005; /* Color of the scroll thumb on hover */
+}

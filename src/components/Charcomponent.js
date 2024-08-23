@@ -16,7 +16,7 @@ function ChartComponent({ type, data, chartType }) {
 
       const backgroundColors = chartType === 'pie' ? ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF']
                            : chartType === 'radar' ? 'rgba(153, 102, 255, 0.2)'
-                           : 'rgba(75, 192, 192, 0.4)';
+                           : 'rgba(75, 192, 192, 0.6)';
       
       const borderColors = chartType === 'pie' ? ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF']
                         : chartType === 'radar' ? 'rgba(153, 102, 255, 1)'
@@ -31,8 +31,9 @@ function ChartComponent({ type, data, chartType }) {
             backgroundColor: backgroundColors,
             borderColor: borderColors,
             borderWidth: 2,
-            hoverBackgroundColor: 'rgba(255, 159, 64, 0.2)',
+            hoverBackgroundColor: 'rgba(255, 159, 64, 0.3)',
             hoverBorderColor: 'rgba(255, 159, 64, 1)',
+            hoverBorderWidth: 3,
           },
         ],
       });
@@ -47,8 +48,8 @@ function ChartComponent({ type, data, chartType }) {
   }[chartType] || Line; // Default to Line if chartType is not recognized
 
   return chartData.labels && chartData.labels.length > 0 ? (
-    <div className="chart-container mb-8 w-full max-w-xl mx-auto">
-      <h2 className="text-xl font-bold mb-4 text-center text-gray-800 dark:text-gray-200">{type.replace('-', ' ')}</h2>
+    <div className="chart-container mb-8 w-full max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-6 transition-all duration-300 hover:shadow-xl">
+      <h2 className="text-2xl font-bold mb-4 text-center text-gray-800 dark:text-gray-200">{type.replace('-', ' ')}</h2>
       <div className="relative">
         <ChartToRender 
           data={chartData} 
@@ -60,36 +61,56 @@ function ChartComponent({ type, data, chartType }) {
                 display: true,
                 position: 'top',
                 labels: {
-                  color: '#333',
+                  color: '#444',
                   font: {
-                    size: 14,
-                    weight: 'bold',
+                    size: 16,
+                    weight: '600',
                   },
+                  usePointStyle: true,
+                  pointStyle: 'circle',
                 },
               },
               tooltip: {
-                backgroundColor: 'rgba(0,0,0,0.7)',
+                backgroundColor: 'rgba(0,0,0,0.8)',
                 titleColor: '#fff',
                 bodyColor: '#fff',
-                cornerRadius: 4,
+                cornerRadius: 5,
+                bodyFont: {
+                  size: 14,
+                },
+                titleFont: {
+                  size: 16,
+                  weight: 'bold',
+                },
+                padding: 10,
+                caretSize: 6,
+                boxPadding: 4,
               },
             },
             scales: {
               y: {
                 beginAtZero: true,
                 grid: {
-                  color: 'rgba(200, 200, 200, 0.2)',
+                  color: 'rgba(220, 220, 220, 0.2)',
                 },
                 ticks: {
-                  color: '#333',
+                  color: '#555',
+                  font: {
+                    size: 14,
+                    weight: '500',
+                  },
                 },
               },
               x: {
                 grid: {
-                  color: 'rgba(200, 200, 200, 0.2)',
+                  color: 'rgba(220, 220, 220, 0.2)',
                 },
                 ticks: {
-                  color: '#333',
+                  color: '#555',
+                  font: {
+                    size: 14,
+                    weight: '500',
+                  },
                 },
               },
             },
