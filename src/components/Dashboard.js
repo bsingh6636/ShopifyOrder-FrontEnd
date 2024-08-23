@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useFetchData from '../hooks/useFetchData';
 import { backend_server } from '../import';
 import moment from 'moment';
@@ -8,14 +8,21 @@ import Buttons from '../pages/Buttons';
 import LoadingShimmer from '../pages/Shimmer';
 
 function Dashboard() {
-  const collectionName = 'shopifyOrders'
+  const collectionName = 'shopifyOrders';
   const [interval, setInterval] = useState('monthly');
-  const [data, setData] = useState(salesData)
+  const [data, setData] = useState(null);
+  const [filteredData, setFilteredData] = useState([]);
   const datas = useFetchData(`${backend_server}`, collectionName);
-  console.log(data)
-  // useEffect(() => {
-  //   setData(datas);
-  // }, [datas]);
+
+  useEffect(() => {
+    setData(salesData); // Set data initially
+  }, []);
+
+  useEffect(() => {
+    if (data) {
+      setFilteredData(filterDataByInterval(data, interval));
+    }
+  }, [data, interval]); // Re-filter data whenever the interval or data changes
 
   const filterDataByInterval = (data, interval) => {
     let filteredData;
@@ -93,26 +100,20 @@ function Dashboard() {
     return filteredData;
   };
 
-  const filteredData = data ? filterDataByInterval(data, interval) : [];
-
-
   return (
-    <div className="dashboard  p-2">
+    <div className="dashboard p-2">
       <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
 
       <Buttons interval={interval} setInterval={setInterval} />
 
-<div className='flex flex-row justify-between mb-6'>
+      <div className='flex flex-row justify-between mb-6'>
         {data ? (
           <ChartMaker data={filteredData} type="sales Data" />
         ) : (
           <LoadingShimmer />
         )}
       </div>
-
-     
     </div>
-
   );
 }
 
